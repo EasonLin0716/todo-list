@@ -1,1 +1,13 @@
-<h1>Index is here</h1>
+<!-- ./views/index.handlebars -->
+<a href="/todos/new">Create</a>
+
+<ul>
+  {{#each todos}}
+  <li>
+    {{{this.name}}}
+    <a href="#">detail</a>
+    <a href="#">edit</a>
+    <button type="submit">delete</button>
+  </li>
+  {{/each}}
+</ul>

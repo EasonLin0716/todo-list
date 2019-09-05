@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const mongoose = require('mongoose')                    // requiring mongoose
+const mongoose = require('mongoose') // requiring mongoose
 
 // 引用 express-handlebars
 const exphbs = require('express-handlebars');
@@ -10,7 +10,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 
-mongoose.connect('mongodb://localhost/todo', { useNewUrlParser: true })   // setting connection to mongoDB
+mongoose.connect('mongodb://localhost/todo', { useNewUrlParser: true }) // setting connection to mongoDB
 
 // mongoose 連線後透過 mongoose.connection 拿到 Connection 的物件
 const db = mongoose.connection
@@ -29,11 +29,14 @@ db.once('open', () => {
 const Todo = require('./models/todo')
 
 app.get('/', (req, res) => {
-  return res.render('index')
+  Todo.find((err, todos) => { // 把 Todo model 所有的資料都抓回來
+    if (err) return console.error(err)
+    return res.render('index', { todos: todos })  // 將資料傳給 index 樣板
+  })
 })
 // 列出全部 Todo
 app.get('/todos', (req, res) => {
-  res.send('列出所有 Todo')
+  return res.redirect('/')
 })
 // 新增一筆 Todo 頁面
 app.get('/todos/new', (req, res) => {
