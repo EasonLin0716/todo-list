@@ -2,6 +2,12 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')                    // requiring mongoose
 
+// 引用 express-handlebars
+const exphbs = require('express-handlebars');
+
+// 告訴 express 使用 handlebars 當作 template engine 並預設 layout 是 main
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.set('view engine', 'handlebars')
 
 
 mongoose.connect('mongodb://localhost/todo', { useNewUrlParser: true })   // setting connection to mongoDB
@@ -23,7 +29,7 @@ db.once('open', () => {
 const Todo = require('./models/todo')
 
 app.get('/', (req, res) => {
-  res.send('Website is running')
+  return res.render('index')
 })
 // 列出全部 Todo
 app.get('/todos', (req, res) => {
