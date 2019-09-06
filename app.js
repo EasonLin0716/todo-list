@@ -34,10 +34,12 @@ db.once('open', () => {
 const Todo = require('./models/todo')
 
 app.get('/', (req, res) => {
-  Todo.find((err, todos) => { // 把 Todo model 所有的資料都抓回來
-    if (err) return console.error(err)
-    return res.render('index', { todos: todos })  // 將資料傳給 index 樣板
-  })
+  Todo.find({}) // 透過 Todo.find({}) 來讀取所有的資料
+    .sort({ name: 'asc' }) // 使用 .sort 把取得的資料用 name 以「升冪 (ascending)」的規則排序
+    .exec((err, todos) => { // .exec 是由 Mongoose 提供，用來執行查詢指令 (query) 的一個方法
+      if (err) return console.error(err)
+      return res.render('index', { todos: todos })  // 將資料傳給 index 樣板
+    })
 })
 // 列出全部 Todo
 app.get('/todos', (req, res) => {
