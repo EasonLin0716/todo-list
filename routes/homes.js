@@ -5,8 +5,12 @@ const router = express.Router()
 const Todo = require('../models/todo')
 
 router.get('/', (req, res) => {
+  // sortResult 用於存放透過req.query自index.handlebars下拉式選單中網址取得的值
+  const sortResult = {}
+  // e.g. sortResult = {}; sortResult = { name: 'asc' }
+  sortResult[req.query.sortTarget] = req.query.sortType
   Todo.find({}) // 透過 Todo.find({}) 來讀取所有的資料
-    .sort({ name: 'asc' }) // 使用 .sort 把取得的資料用 name 以「升冪 (ascending)」的規則排序
+    .sort(sortResult)
     .exec((err, todos) => { // .exec 是由 Mongoose 提供，用來執行查詢指令 (query) 的一個方法
       if (err) return console.error(err)
       return res.render('index', { todos: todos })  // 將資料傳給 index 樣板

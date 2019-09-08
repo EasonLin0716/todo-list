@@ -1,4 +1,15 @@
 <!-- ./views/index.handlebars -->
+<div class="dropdown mb-1 d-flex justify-content-end">
+  <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">
+    排序方式
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="/?sortTarget=name&sortType=asc">A->Z</a>
+    <a class="dropdown-item" href="/?sortTarget=name&sortType=desc">Z->A</a>
+    <a class="dropdown-item" href="/?sortTarget=importance&sortType=desc">★★★->★</a>
+    <a class="dropdown-item" href="/?sortTarget=importance&sortType=asc">★->★★★</a>
+  </div>
+</div>
 <ul class="list-group">
   {{#each todos}}
   <li class="list-group-item">

@@ -48,6 +48,7 @@ router.put('/:id', (req, res) => {
   Todo.findById(req.params.id, (err, todo) => {
     if (err) return console.error(err)
     todo.name = req.body.name
+    todo.importance = req.body.importance
     if (req.body.done === 'on') {
       todo.done = true
     } else {
