@@ -1,7 +1,16 @@
 <!-- ./views/layouts/new.handlebars -->
 <form action="/todos" method="POST">
   <div class="input-group mb-3">
-    <input type="text" placeholder="name" name="name" class="form-control">
+    <input type="text" placeholder="name" name="name" class="col-9">
+
+    <select class="dropdown col-auto bg-primary" name="importance">
+      <optgroup label="Importance">
+        <option name="table1" value="★">★</option>
+        <option name="table2" value="★★">★★</option>
+        <option name="table3" value="★★★">★★★</option>
+      </optgroup>
+    </select>
+
     <div class="input-group-append">
       <button type="submit" class="btn btn-success">Create</button>
     </div>
