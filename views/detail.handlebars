@@ -6,7 +6,8 @@
         <input type="checkbox" name="done" {{#if todo.done }} checked{{/if}} disabled />
       </div>
     </div>
-    <input type="text" placeholder="name" name="name" value="{{{todo.name}}}" class="form-control" disabled>
+    <input type="text" placeholder="name" name="name" value="{{{todo.name}}}{{{todo.importance}}}" class="form-control"
+      disabled>
     <div class="input-group-append">
       <a href="/todos/{{{todo.id}}}/edit" class="btn btn-success">edit</a>
       <button type="submit" class="btn btn-danger">delete</button>

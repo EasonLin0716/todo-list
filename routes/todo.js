@@ -27,7 +27,8 @@ router.post('/', (req, res) => {
   // 建立 Todo model 實例
   console.log(req.body)
   const todo = new Todo({
-    name: req.body.name, // name 是從 new 頁面 form 傳過來
+    name: req.body.name, // 從 new 頁面 form 傳過來
+    importance: req.body.importance
   })
   // 存入資料庫
   todo.save(err => {

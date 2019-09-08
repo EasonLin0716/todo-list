@@ -6,7 +6,16 @@
         <input type="checkbox" name="done" {{#if todo.done }} checked{{/if}} />
       </div>
     </div>
-    <input type="text" placeholder="name" name="name" value="{{{todo.name}}}" class="form-control">
+    <input type="text" placeholder="name" name="name" value="{{{todo.name}}}" class="col-9">
+
+    <select class="dropdown col-auto bg-primary" name="importance">
+      <optgroup label="Importance">
+        <option name="table1" value="★">★</option>
+        <option name="table2" value="★★">★★</option>
+        <option name="table3" value="★★★">★★★</option>
+      </optgroup>
+    </select>
+
     <div class="input-group-append">
       <button type="submit" class="btn btn-success">Edit</button>
     </div>
