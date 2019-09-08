@@ -1,11 +1,11 @@
-# Restaurant-list
-Class Todo list built with express.js and mongoDB
+# Todo list
+Classic Todo list built with express.js and mongoDB
 ## Features
 1. Create your todo things
 2. Read, edit or delete it
 3. Sort your list with importance or name
 ## Preview
-![Cover](https://github.com/EasonLin0716/restaurant-list/blob/master/preview/restaurant2.1_cover.jpg)
+![Cover](https://github.com/EasonLin0716/todo-list/blob/master/previews/todo-list-cover.png)
 ## Environment set up
 1. Node.js
 2. Express.js
