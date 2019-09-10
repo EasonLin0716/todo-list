@@ -41,6 +41,7 @@ const Todo = require('./models/todo')
 
 app.use('/', require('./routes/homes'))
 app.use('/todos', require('./routes/todo'))
+app.use('/users', require('./routes/user'))
 
 
 app.listen(3000, () => {
