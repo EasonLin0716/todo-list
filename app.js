@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose') // requiring mongoose
+const session = require('express-session')
 
 // 引用 body-parser
 const bodyParser = require('body-parser');
@@ -20,6 +21,11 @@ app.set('view engine', 'handlebars')
 // 設定 method-override
 app.use(methodOverride('_method'))
 
+app.use(session({
+  secret: 'your secret key', // secret: 定義一組屬於你的字串做為私鑰
+  resave: false, // 當設定為 true 時，會在每一次與使用者互動後，強制把 session 更新到 session store 裡
+  saveUninitialized: true,
+}))
 
 mongoose.connect('mongodb://localhost/todo', { useNewUrlParser: true }) // setting connection to mongoDB
 

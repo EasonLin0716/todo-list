@@ -24,7 +24,7 @@ router.post('/register', (req, res) => {
   User.findOne({ email: email }).then(user => {
     if (user) {
       console.log('user already exists')
-      res.render('/register', {
+      res.render('register', {
         name,
         email,
         password,
@@ -44,52 +44,6 @@ router.post('/register', (req, res) => {
     }
   })
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// router.post('/register', (req, res) => {
-//   const { name, email, password, password2 } = req.body
-//   // 使用 Mongoose 提供的 findOne 方法
-//   User.findOne({ email: email }).then(user => {
-//     if (user) {
-//       console.log('User already exists')
-//       res.render('register', { // 使用者已經註冊過
-//         name,
-//         email,
-//         password,
-//         password2
-//       })
-//     } else {
-//       const newUser = new User({ // 如果 email 不存在就直接新增
-//         name,
-//         email,
-//         password
-//       })
-//       newUser
-//         .save()
-//         .then(user => {
-//           res.redirect('/') // 新增完成導回首頁
-//         })
-//         .catch(err => console.log(err))
-//     }
-//   })
-// })
 
 // 登出
 router.get('/logout', (req, res) => {
