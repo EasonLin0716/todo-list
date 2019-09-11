@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose') // requiring mongoose
 const session = require('express-session')
+// 載入 passport
+const passport = require('passport')
 
 // 引用 body-parser
 const bodyParser = require('body-parser');
@@ -14,6 +16,10 @@ const exphbs = require('express-handlebars');
 // 引用 method-override
 const methodOverride = require('method-override')
 
+
+
+
+
 // 告訴 express 使用 handlebars 當作 template engine 並預設 layout 是 main
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -24,8 +30,19 @@ app.use(methodOverride('_method'))
 app.use(session({
   secret: 'your secret key', // secret: 定義一組屬於你的字串做為私鑰
   resave: false, // 當設定為 true 時，會在每一次與使用者互動後，強制把 session 更新到 session store 裡
-  saveUninitialized: true,
+  saveUninitialized: true, // 強制將未初始化的 session 存回 session store。未初始化表示這個 session 是新的而且沒有被修改過，例如未登入的使用者的 session
 }))
+
+// 使用 Passport 
+app.use(passport.initialize())
+app.use(passport.session())
+// 載入 Passport config
+require('./config/passport')(passport) // 這裡的 passport 是一個 Passport 套件的 instance
+// 登入後可以取得使用者的資訊方便我們在 view 裡面直接使用
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  next()
+})
 
 mongoose.connect('mongodb://localhost/todo', { useNewUrlParser: true }) // setting connection to mongoDB
 
