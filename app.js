@@ -41,10 +41,12 @@ require('./config/passport')(passport) // 這裡的 passport 是一個 Passport 
 // 登入後可以取得使用者的資訊方便我們在 view 裡面直接使用
 app.use((req, res, next) => {
   res.locals.user = req.user
+  res.locals.isAuthenticated = req.isAuthenticated() // 辨識使用者是否已經登入的變數，讓 view 可以使用
   next()
 })
 
-mongoose.connect('mongodb://localhost/todo', { useNewUrlParser: true }) // setting connection to mongoDB
+// mongoDB 連線
+mongoose.connect('mongodb://localhost/todo', { useNewUrlParser: true, useCreateIndex: true })
 
 // mongoose 連線後透過 mongoose.connection 拿到 Connection 的物件
 const db = mongoose.connection

@@ -11,7 +11,7 @@ router.get('/', authenticated, (req, res) => {
   const sortResult = {}
   // e.g. sortResult = {}; sortResult = { name: 'asc' }
   sortResult[req.query.sortTarget] = req.query.sortType
-  Todo.find({}) // 透過 Todo.find({}) 來讀取所有的資料
+  Todo.find({ userId: req.user._id }) // 只會列出登入使用者的 todo
     .sort(sortResult)
     .exec((err, todos) => { // .exec 是由 Mongoose 提供，用來執行查詢指令 (query) 的一個方法
       if (err) return console.error(err)
