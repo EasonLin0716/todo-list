@@ -3,8 +3,10 @@ const express = require('express')
 const router = express.Router()
 /* controller 需要跟資料庫溝通，所以在這裡也需要引入 model Todo */
 const Todo = require('../models/todo')
+// 載入 auth middleware 裡的 authenticated 方法
+const { authenticated } = require('../config/auth')
 
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
   // sortResult 用於存放透過req.query自index.handlebars下拉式選單中網址取得的值
   const sortResult = {}
   // e.g. sortResult = {}; sortResult = { name: 'asc' }
