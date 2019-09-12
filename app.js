@@ -1,5 +1,10 @@
 const express = require('express')
 const app = express()
+// 判別開發環境
+if (process.env.NODE_ENV !== 'production') { // 如果不是 production 模式
+  require('dotenv').config() // 使用 dotenv 讀取 .env 檔案
+}
+
 const mongoose = require('mongoose') // requiring mongoose
 const session = require('express-session')
 // 載入 passport
@@ -64,9 +69,11 @@ db.once('open', () => {
 // 載入 todo model
 const Todo = require('./models/todo')
 
+// 載入路由
 app.use('/', require('./routes/homes'))
 app.use('/todos', require('./routes/todo'))
 app.use('/users', require('./routes/users'))
+app.use('/auth', require('./routes/auths'))
 
 
 app.listen(3000, () => {
