@@ -3,9 +3,9 @@
 <div class="row mt-5">
   <div class="col-md-6 m-auto">
     <div class="card card-body">
-      <h1 class="text-center mb-3">
-        Register
-      </h1>
+      <h1 class="text-center mb-3">Register</h1>
+      {{!-- 引用 ./partials/messages.handlebars --}}
+      {{> messages}}
       <form action="/users/register" method="POST">
         <div class="form-group">
           <label for="name">Name</label>

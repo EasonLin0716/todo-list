@@ -10,6 +10,9 @@ const session = require('express-session')
 // 載入 passport
 const passport = require('passport')
 
+// 引用 connect-flash
+const flash = require('connect-flash')
+
 // 引用 body-parser
 const bodyParser = require('body-parser');
 // 設定 bodyParser
@@ -20,9 +23,6 @@ const exphbs = require('express-handlebars');
 
 // 引用 method-override
 const methodOverride = require('method-override')
-
-
-
 
 
 // 告訴 express 使用 handlebars 當作 template engine 並預設 layout 是 main
@@ -38,15 +38,23 @@ app.use(session({
   saveUninitialized: true, // 強制將未初始化的 session 存回 session store。未初始化表示這個 session 是新的而且沒有被修改過，例如未登入的使用者的 session
 }))
 
+
+
 // 使用 Passport 
 app.use(passport.initialize())
 app.use(passport.session())
 // 載入 Passport config
 require('./config/passport')(passport) // 這裡的 passport 是一個 Passport 套件的 instance
+
+// 使用 connect-flash
+app.use(flash())
+
 // 登入後可以取得使用者的資訊方便我們在 view 裡面直接使用
 app.use((req, res, next) => {
   res.locals.user = req.user
   res.locals.isAuthenticated = req.isAuthenticated() // 辨識使用者是否已經登入的變數，讓 view 可以使用
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
 
